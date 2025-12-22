@@ -14,24 +14,14 @@ public class AuthController {
 
     // 1️⃣ HOME PAGE
     @GetMapping("/")
-    public String home() {
-        return "home";   // home.html
+    public String greetings() {
+        return "greeting";   // home.html
     }
 
     // 2️⃣ SHOW LOGIN PAGE
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";  // login.html
-    }
-
-    // 3️⃣ PROCESS LOGIN
-    @PostMapping("/login")
-    public String processLogin(
-            @RequestParam String userName,
-            @RequestParam String password
-    ) {
-        userService.loginUser(userName, password);
-        return "redirect:/"; // or dashboard
     }
 
     // 4️⃣ SHOW REGISTER PAGE

@@ -3,6 +3,7 @@ package app.Service;
 import app.Database.User;
 import app.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,6 +13,9 @@ public class UserService {
 
     @Autowired
     public UserRepository userRepository;
+
+    @Autowired
+    public PasswordEncoder passwordEncoder;
 
     public void registerUser(
             User user
@@ -24,15 +28,7 @@ public class UserService {
             throw new RuntimeException("Email already exists");
         }
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-    }
-
-    public void loginUser(String username, String password) {
-        Optional<User> user = userRepository.findByUserName(username);
-
-        if (user.isPresent() && user.get().getPassword().equals(password)) {
-
-        }
-
     }
 }

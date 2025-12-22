@@ -12,12 +12,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
             .csrf(csrf -> csrf.disable()) // 👈 IMPORTANT for now
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(
-                            "/",
                             "/login",
                             "/register",
                             "/css/**",
@@ -33,7 +31,7 @@ public class SecurityConfig {
                     .permitAll()
             )
             .logout(logout -> logout
-                    .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/login")
             );
 
         return http.build();
